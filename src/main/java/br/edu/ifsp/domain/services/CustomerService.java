@@ -13,13 +13,8 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     @Transactional(readOnly = true)
-    public Customer findByCpf(String email) {
-        return customerRepository.findByCpf(email);
-    }
-
-    @Transactional(readOnly = true)
-    public Customer findByEmail(String email) {
-        return customerRepository.findByEmail(email);
+    public CustomerDTO findByCPFOrEmail(String customerToFInd) {
+        return new CustomerDTO(customerRepository.queryToFindByCPFOrEmail(customerToFInd));
     }
 
     @Transactional
@@ -34,7 +29,7 @@ public class CustomerService {
 //        }
     }
 
-    private boolean isCustomer(CustomerDTO customerDTO) {
-        return findByCpf(customerDTO.getCpf()) != null || findByEmail(customerDTO.getEmail()) != null;
-    }
+//    private boolean isCustomer(CustomerDTO customerDTO) {
+//        return findByCpf(customerDTO.getCpf()) != null || findByEmail(customerDTO.getEmail()) != null;
+//    }
 }

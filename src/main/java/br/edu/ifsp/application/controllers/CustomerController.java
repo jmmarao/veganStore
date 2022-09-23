@@ -17,4 +17,9 @@ public class CustomerController {
         customerService.addCustomer(customerDTO);
         return ResponseEntity.ok().body("Cliente adicionado com sucesso!");
     }
+
+    @GetMapping("/{customerToFind}")
+    public void customerToFindByCPF(@PathVariable(value = "customerToFind") String customerToFind) {
+        System.out.println("Customer: " + customerService.findByCPFOrEmail(customerToFind));
+    }
 }
