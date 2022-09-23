@@ -16,10 +16,9 @@ public class CustomerDTO {
     private String cpf;
 
     public CustomerDTO(Customer entity) {
-        id = entity.getId();
-        name = entity.getName();
         email = entity.getEmail();
-        password = entity.getPassword();
         cpf = entity.getCpf();
+        name = entity.getName();
+        password = entity.getPassword();
     }
 }
