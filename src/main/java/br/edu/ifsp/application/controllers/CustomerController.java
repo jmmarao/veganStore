@@ -19,7 +19,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{customerToFind}")
-    public ResponseEntity<?> customerToFindByCPF(@PathVariable(value = "customerToFind") String customerToFind) {
+    public ResponseEntity<?> customerToFind(@PathVariable(value = "customerToFind") String customerToFind) {
         return ResponseEntity.ok().body(customerService.findByCPFOrEmail(customerToFind));
     }
 }

@@ -2,6 +2,7 @@ package br.edu.ifsp.application.controllers.exceptions;
 
 import br.edu.ifsp.domain.services.exceptions.CustomerAlreadyExistException;
 import br.edu.ifsp.domain.services.exceptions.CustomerDoesNotExistException;
+import br.edu.ifsp.domain.services.exceptions.ProductDoesNotExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -31,6 +32,18 @@ public class ResourceExceptionHandler {
         err.setTimestamp(Instant.now());
         err.setStatus(status.value());
         err.setError("The customer does not exist in the system.");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ProductDoesNotExistException.class)
+    public ResponseEntity<StandardError> entityNotFound(ProductDoesNotExistException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError();
+        err.setTimestamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("The product and the provider do not exist in the system.");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);

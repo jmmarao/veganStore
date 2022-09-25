@@ -37,8 +37,8 @@ public class CustomerService {
     }
 
     @Transactional(readOnly = true)
-    public CustomerDTO findByCPFOrEmail(String customerToFInd) {
-        Customer customerToFind = customerRepository.queryToFindByCPFOrEmail(customerToFInd);
+    public CustomerDTO findByCPFOrEmail(String stringToFInd) {
+        Customer customerToFind = customerRepository.queryToFindByCPFOrEmail(stringToFInd);
 
         if (customerToFind == null)
             throw new CustomerDoesNotExistException("Cliente não encontrado no sistema! Tente novamente");
