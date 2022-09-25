@@ -1,6 +1,7 @@
 package br.edu.ifsp.application.controllers.exceptions;
 
-import br.edu.ifsp.domain.services.exceptions.CustomerAlreadyExistExcepiton;
+import br.edu.ifsp.domain.services.exceptions.CustomerAlreadyExistException;
+import br.edu.ifsp.domain.services.exceptions.CustomerDoesNotExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,13 +12,25 @@ import java.time.Instant;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
-    @ExceptionHandler(CustomerAlreadyExistExcepiton.class)
-    public ResponseEntity<StandardError> entityNotFound(CustomerAlreadyExistExcepiton e, HttpServletRequest request) {
+    @ExceptionHandler(CustomerAlreadyExistException.class)
+    public ResponseEntity<StandardError> entityNotFound(CustomerAlreadyExistException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError();
         err.setTimestamp(Instant.now());
         err.setStatus(status.value());
-        err.setError("Customer already exist.");
+        err.setError("The customer already exist.");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(CustomerDoesNotExistException.class)
+    public ResponseEntity<StandardError> entityNotFound(CustomerDoesNotExistException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError();
+        err.setTimestamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("The customer does not exist in the system.");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);
