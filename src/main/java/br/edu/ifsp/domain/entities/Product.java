@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.entities;
 
+import br.edu.ifsp.domain.dtos.ProductDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,12 @@ public class Product {
     private Double costPrice;
     private Double salePrice;
     private String provider;
+
+    public Product(ProductDTO productDTO) {
+        name = productDTO.getName();
+        description = productDTO.getDescription();
+        costPrice = productDTO.getCostPrice();
+        salePrice = productDTO.getSalePrice();
+        provider = productDTO.getProvider();
+    }
 }
