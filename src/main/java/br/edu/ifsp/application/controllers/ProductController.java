@@ -22,4 +22,11 @@ public class ProductController {
     public ResponseEntity<?> productToFind(@PathVariable(value = "productToFind") String productToFind) {
         return ResponseEntity.ok().body(productService.findByNameOrProvider(productToFind));
     }
+
+    @PostMapping("/{productId}/update")
+    public ResponseEntity<String> productToUpdate(@PathVariable(value = "productId") Integer productId,
+                                                  @RequestBody ProductDTO productDTO) {
+        productService.updateProduct(productId, productDTO);
+        return ResponseEntity.ok().body("Produto alterado com sucesso!");
+    }
 }

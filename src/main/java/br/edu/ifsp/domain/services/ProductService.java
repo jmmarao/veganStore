@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -33,5 +34,21 @@ public class ProductService {
             products.add(new ProductDTO(product));
         }
         return products;
+    }
+
+    @Transactional
+    public void updateProduct(Integer productId, ProductDTO productDTO) {
+        Optional<Product> productToFind = productRepository.findById(productId);
+
+        if (productToFind.isEmpty())
+            throw new ProductDoesNotExistException("Produto não encontrados no sistema! Tente novamente");
+
+        productRepository.updateProductById(
+                productDTO.getId(),
+                productDTO.getName(),
+                productDTO.getDescription(),
+                productDTO.getCostPrice(),
+                productDTO.getSalePrice(),
+                productDTO.getProvider());
     }
 }
