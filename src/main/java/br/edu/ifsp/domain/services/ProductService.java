@@ -44,7 +44,7 @@ public class ProductService {
             throw new ProductDoesNotExistException("Produto não encontrados no sistema! Tente novamente");
 
         productRepository.updateProductById(
-                productDTO.getId(),
+                productId,
                 productDTO.getName(),
                 productDTO.getDescription(),
                 productDTO.getCostPrice(),
