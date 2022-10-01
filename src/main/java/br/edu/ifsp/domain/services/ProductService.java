@@ -41,7 +41,7 @@ public class ProductService {
         Optional<Product> productToFind = productRepository.findById(productId);
 
         if (productToFind.isEmpty())
-            throw new ProductDoesNotExistException("Produto não encontrados no sistema! Tente novamente");
+            throw new ProductDoesNotExistException("Produto não encontrado no sistema! Tente novamente");
 
         productRepository.updateProductById(
                 productId,
@@ -50,5 +50,15 @@ public class ProductService {
                 productDTO.getCostPrice(),
                 productDTO.getSalePrice(),
                 productDTO.getProvider());
+    }
+
+    @Transactional
+    public void deleteProduct(Integer productId) {
+        Optional<Product> productToFind = productRepository.findById(productId);
+
+        if (productToFind.isEmpty())
+            throw new ProductDoesNotExistException("Produto não encontrado no sistema! Tente novamente");
+
+        productRepository.delete(productToFind.get());
     }
 }

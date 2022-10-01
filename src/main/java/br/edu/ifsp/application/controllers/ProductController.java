@@ -29,4 +29,10 @@ public class ProductController {
         productService.updateProduct(productId, productDTO);
         return ResponseEntity.ok().body("Produto alterado com sucesso!");
     }
+
+    @DeleteMapping("/{productId}/delete")
+    public ResponseEntity<String> productToDelete(@PathVariable(value = "productId") Integer productId) {
+        productService.deleteProduct(productId);
+        return ResponseEntity.ok().body("Produto removido com sucesso!");
+    }
 }
