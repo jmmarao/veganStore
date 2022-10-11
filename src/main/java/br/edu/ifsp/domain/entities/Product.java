@@ -23,11 +23,16 @@ public class Product {
     private Double salePrice;
     private String provider;
 
+    @ManyToOne
+    @JoinColumn(name="order_id")
+    private Order order;
+
     public Product(ProductDTO productDTO) {
         name = productDTO.getName();
         description = productDTO.getDescription();
         costPrice = productDTO.getCostPrice();
         salePrice = productDTO.getSalePrice();
         provider = productDTO.getProvider();
+        order = productDTO.getOrder();
     }
 }

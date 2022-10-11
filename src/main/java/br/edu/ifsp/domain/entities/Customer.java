@@ -24,12 +24,15 @@ public class Customer {
     private String cpf;
 
     private String name;
-    private String password;
+
+    @OneToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
 
     public Customer(CustomerDTO customerDTO) {
         email = customerDTO.getEmail();
         cpf = customerDTO.getCpf();
         name = customerDTO.getName();
-        password = customerDTO.getPassword();
+        order = customerDTO.getOrder();
     }
 }

@@ -1,5 +1,6 @@
 package br.edu.ifsp.domain.dtos;
 
+import br.edu.ifsp.domain.entities.Order;
 import br.edu.ifsp.domain.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class ProductDTO {
     private Double costPrice;
     private Double salePrice;
     private String provider;
+    private Order order;
 
     public ProductDTO(Product entity) {
         id = entity.getId();
@@ -23,5 +25,6 @@ public class ProductDTO {
         costPrice = entity.getCostPrice();
         salePrice = entity.getSalePrice();
         provider = entity.getProvider();
+        order = entity.getOrder();
     }
 }
