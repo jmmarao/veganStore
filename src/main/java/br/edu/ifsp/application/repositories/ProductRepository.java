@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,10 +21,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "description = :descriptionToUpdate, cost_price = :costPriceToUpdate, " +
             "sale_price = :salePriceToUpdate, provider = :providerToUpdate " +
             "WHERE id = :productId")
-//    @Query(nativeQuery = true, value = "UPDATE products SET name = ?2, " +
-//            "description = ?3, cost_price = ?4, " +
-//            "sale_price = ?5, provider = ?6 " +
-//            "WHERE id = ?1")
     public void updateProductById(Integer productId, String nameToUpdate, String descriptionToUpdate,
                                   Double costPriceToUpdate, Double salePriceToUpdate, String providerToUpdate);
 }
