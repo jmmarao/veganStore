@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +18,7 @@ public class ProductDTO {
     private Double costPrice;
     private Double salePrice;
     private String provider;
-    private Order order;
+    private List<Order> orders;
 
     public ProductDTO(Product entity) {
         id = entity.getId();
@@ -25,6 +27,6 @@ public class ProductDTO {
         costPrice = entity.getCostPrice();
         salePrice = entity.getSalePrice();
         provider = entity.getProvider();
-        order = entity.getOrder();
+        orders = entity.getOrders();
     }
 }

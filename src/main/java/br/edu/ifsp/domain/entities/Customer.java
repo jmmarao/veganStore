@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,14 +26,13 @@ public class Customer {
 
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private Order order;
+    @OneToMany(mappedBy = "id")
+    private List<Order> orders;
 
     public Customer(CustomerDTO customerDTO) {
         email = customerDTO.getEmail();
         cpf = customerDTO.getCpf();
         name = customerDTO.getName();
-        order = customerDTO.getOrder();
+        orders = customerDTO.getOrders();
     }
 }

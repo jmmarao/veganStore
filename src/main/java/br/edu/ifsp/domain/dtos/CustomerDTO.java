@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,13 +16,13 @@ public class CustomerDTO {
     private String name;
     private String email;
     private String cpf;
-    private Order order;
+    private List<Order> orders;
 
     public CustomerDTO(Customer entity) {
         id = entity.getId();
         email = entity.getEmail();
         cpf = entity.getCpf();
         name = entity.getName();
-        order = entity.getOrder();
+        orders = entity.getOrders();
     }
 }

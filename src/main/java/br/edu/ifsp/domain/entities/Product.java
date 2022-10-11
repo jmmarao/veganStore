@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,9 +24,8 @@ public class Product {
     private Double salePrice;
     private String provider;
 
-    @ManyToOne
-    @JoinColumn(name="order_id")
-    private Order order;
+    @OneToMany(mappedBy = "id")
+    private List<Order> orders;
 
     public Product(ProductDTO productDTO) {
         name = productDTO.getName();
@@ -33,6 +33,6 @@ public class Product {
         costPrice = productDTO.getCostPrice();
         salePrice = productDTO.getSalePrice();
         provider = productDTO.getProvider();
-        order = productDTO.getOrder();
+        orders = productDTO.getOrders();
     }
 }
