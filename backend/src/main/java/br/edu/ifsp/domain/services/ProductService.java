@@ -36,6 +36,17 @@ public class ProductService {
         return products;
     }
 
+    @Transactional(readOnly = true)
+    public List<ProductDTO> findProducts() {
+        List<Product> productsDB = productRepository.findAll();
+
+        List<ProductDTO> products = new ArrayList<>();
+        for (Product product : productsDB) {
+            products.add(new ProductDTO(product));
+        }
+        return products;
+    }
+
     @Transactional
     public void updateProduct(Integer productId, ProductDTO productDTO) {
         Optional<Product> productToFind = productRepository.findById(productId);

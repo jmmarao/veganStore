@@ -12,6 +12,10 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @GetMapping
+    public ResponseEntity<?> allCustomer() {
+        return ResponseEntity.ok().body(customerService.findCustomers());
+    }
     @PostMapping("/save")
     public ResponseEntity<String> customerToAdd(@RequestBody CustomerDTO customerDTO) {
         customerService.addCustomer(customerDTO);

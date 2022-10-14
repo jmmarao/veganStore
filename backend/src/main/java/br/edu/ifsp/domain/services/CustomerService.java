@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CustomerService {
     @Autowired
@@ -19,6 +22,17 @@ public class CustomerService {
 
         Customer customer = new Customer(customerDTO);
         customerRepository.save(customer);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CustomerDTO> findCustomers() {
+        List<Customer> customersDB = customerRepository.findAll();
+
+        List<CustomerDTO> customers = new ArrayList<>();
+        for (Customer customer : customersDB) {
+            customers.add(new CustomerDTO(customer));
+        }
+        return customers;
     }
 
     private void validateCustomer(CustomerDTO customerDTO) {
