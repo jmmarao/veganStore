@@ -1,4 +1,6 @@
 import Autentication from "./components/Autentication";
+import CustomerList from "./components/Customers/List";
+import NewCustomer from "./components/Customers/New";
 import Header from "./components/Header";
 
 
@@ -8,8 +10,8 @@ function App() {
       <Header />
       <main>
         <section>
-          <div className="container">
-            <Autentication />
+          <div>
+            <CustomerList />
           </div>
 
         </section>

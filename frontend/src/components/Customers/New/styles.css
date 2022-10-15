@@ -1,0 +1,33 @@
+.new-box {
+    background-color: whitesmoke;
+    width: 500px;
+    border-radius: 10px;
+    padding: 70px 100px;
+    margin-top: 80px;
+    margin-left: 20%;
+    
+}
+
+.new-title {
+    color: #007565;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.new-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.form-label{
+    color: #007565;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.buttons{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

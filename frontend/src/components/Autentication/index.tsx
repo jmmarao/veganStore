@@ -13,7 +13,7 @@ function Autentication() {
                         <Form.Label>Usuário</Form.Label>
                         <Form.Control type="text" placeholder="Digite seu nome de usuário" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Senha</Form.Label>
                         <Form.Control type="password" placeholder="Digite sua senha" />
                     </Form.Group>

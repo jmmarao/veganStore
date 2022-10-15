@@ -3,14 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from "react";
 import { Table } from 'react-bootstrap';
 import api from '../../../service/api';
+import { Customer } from '../../../models/customer'
 
 function CustomerList() {
-    const [customers, setCustomers] = useState();
+    const [customers, setCustomers] = useState<Customer[]>([]);
 
     useEffect(() => {
         api
-            .get("/all")
-            .then((response) => setCustomers(response.data))
+            .get("/customer")
+            .then((response) => setCustomers(response.data.content))
             .catch((err) => {
                 console.error("Ops! Ocorreu um erro!" + err);
             });
@@ -18,11 +19,7 @@ function CustomerList() {
 
 
     return (
-        <div>
-            <h1>Customer List</h1>
-        </div>
-        /*
-        <div className="listCustomers">
+        <>
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
@@ -33,7 +30,7 @@ function CustomerList() {
                 </thead>
                 <tbody>
                     {customers.map((customer) => (
-                        <tr>
+                        <tr key={customer.id}>
                             <td>{customer.name}</td>
                             <td>{customer.email}</td>
                             <td>{customer.cpf}</td>
@@ -41,8 +38,7 @@ function CustomerList() {
                     ))}
                 </tbody>
             </Table>
-
-        </div> */
+        </>
     )
 }
 
