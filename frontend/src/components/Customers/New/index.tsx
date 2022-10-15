@@ -1,9 +1,23 @@
+import { useEffect, useState } from "react";
+import api from '../../../service/api';
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import { Form } from 'react-bootstrap';
+import { Customer } from '../../../models/customer'
 
 function NewCustomer() {
+    const [customer, setCustomer] = useState<Customer[]>([]);
+
+    useEffect(() => {
+        api
+            .post("/customer/save")
+            .then((response) => setCustomer(response.data))
+            .catch((err) => {
+                console.error("Ops! Ocorreu um erro!" + err);
+            });
+    }, []);
+
     return (
         <div className="new-container">
             <div className="new-box">

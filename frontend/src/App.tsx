@@ -1,6 +1,6 @@
-import Autentication from "./components/Autentication";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Autentication from './components/Autentication';
 import CustomerList from "./components/Customers/List";
-import NewCustomer from "./components/Customers/New";
 import Header from "./components/Header";
 
 
