@@ -18,6 +18,19 @@ function CustomerList() {
 
     return (
         <div className="card">
+            <div >
+                <div className="btn">
+                    <button className="btn-new-customer">Novo Cliente</button>
+                </div>
+
+            </div>
+
+            <h2 className="customer-title">Buscar cliente</h2>
+
+
+            <div className="customer-form-control-container">
+                <input className="customer-form-control" type="text" />
+            </div>
             <table className="customer-table">
                 <thead>
                     <tr className="show-cell">

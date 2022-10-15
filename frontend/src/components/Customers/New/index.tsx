@@ -9,6 +9,10 @@ import { Customer } from '../../../models/customer'
 function NewCustomer() {
     const [customer, setCustomer] = useState<Customer[]>([]);
 
+    const [name, setName] = useState("");
+    const [cpf, setCpf] = useState("");
+    const [email, setEmail] = useState("");
+
     useEffect(() => {
         api
             .post("/customer/save")
@@ -29,7 +33,7 @@ function NewCustomer() {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Digite o email do cliente" />
+                        <Form.Control type="email" placeholder="Digite o email do cliente"/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicCPF">
                         <Form.Label>CPF</Form.Label>
