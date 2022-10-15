@@ -1,3 +1,4 @@
+import Autentication from "./components/Autentication";
 import Header from "./components/Header";
 
 
@@ -8,7 +9,7 @@ function App() {
       <main>
         <section>
           <div className="container">
-            
+            <Autentication />
           </div>
 
         </section>
