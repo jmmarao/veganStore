@@ -1,6 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles.css';
 import { useEffect, useState } from "react";
-import { Table } from 'react-bootstrap';
 import api from '../../../service/api';
 import { Customer } from '../../../models/customer'
 
@@ -18,10 +17,10 @@ function CustomerList() {
 
 
     return (
-        <div>
-            <Table striped bordered hover size="sm">
+        <div className="card">
+            <table className="customer-table">
                 <thead>
-                    <tr>
+                    <tr className="show-cell">
                         <th>Nome</th>
                         <th>Email</th>
                         <th>CPF</th>
@@ -36,8 +35,7 @@ function CustomerList() {
                         </tr>
                     ))}
                 </tbody>
-            </Table>
-
+            </table>
         </div>
     );
 
