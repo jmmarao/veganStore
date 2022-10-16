@@ -72,15 +72,8 @@
     background-color: #007565;
 }
 
-.show-cell {
-    display: none;
-}
 
 @media (min-width: 576px) {
-    .show-cell {
-        display: table-cell;
-    }
-
     .card {
         padding: 35px;
     }
