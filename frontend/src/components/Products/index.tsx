@@ -1,7 +1,7 @@
 import './styles.css';
-import { useEffect, useState } from "react";
-import { Product } from "../../../models/product";
-import api from '../../../service/api';
+import { useEffect, useState, useRef } from "react";
+import { Product } from "../../models/product";
+import api from '../../service/api';
 
 /* import 'bootstrap/dist/css/bootstrap.min.css'; */
 import Button from 'react-bootstrap/Button';
@@ -11,8 +11,35 @@ import Modal from 'react-bootstrap/Modal';
 function Products() {
     const [show, setShow] = useState(false);
 
+    const nameRef = useRef(null);
+    const descriptionRef = useRef(null);
+    const providerRef = useRef(null);
+    const costPriceRef = useRef(null);
+    const salePriceRef = useRef(null);
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleSave = () => {
+        const productToSave = {
+            name: nameRef.current.value,
+            description: descriptionRef.current.value,
+            costPrice: costPriceRef.current.value,
+            salePrice: salePriceRef.current.value,
+            provider: providerRef.current.value
+        };
+
+        api
+            .post(`/product/save`, productToSave)
+            .then(response => console.log("Posting data: ", response))
+            .catch((err) => {
+                console.error("Ops! Ocorreu um erro!" + err);
+            });
+
+        setShow(false)
+
+        window.location.reload();
+    };
 
     const [products, setProducts] = useState<Product[]>([]);
 
@@ -33,48 +60,56 @@ function Products() {
                 </div>
 
             </div>
-            {/*             <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button> */}
 
             <Modal show={show} onHide={handleClose} className="modal-container">
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Novo Produto</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="name@example.com"
-                                autoFocus
-                            />
-                        </Form.Group>
-                        <Form.Group
-                            className="mb-3"
-                            controlId="exampleForm.ControlTextarea1"
-                        >
-                            <Form.Label>Example textarea</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                        <Form.Group>
+                            <Form.Control className='formControl'
+                                type="text"
+                                placeholder="Produto"
+                                ref={nameRef} />
+
+                            <Form.Control className='formControl'
+                                type="text"
+                                placeholder="Descrição do produto"
+                                ref={descriptionRef} />
+
+                            <Form.Control className='formControl'
+                                type="text"
+                                placeholder="Provedor"
+                                ref={providerRef} />
+
+                            <Form.Control className='formControl'
+                                type="number"
+                                placeholder="Valor de custo (R$)"
+                                ref={costPriceRef} />
+
+                            <Form.Control className='formControl'
+                                type="number"
+                                placeholder="Valor de venda (R$)"
+                                ref={salePriceRef} />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        Fechar
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
+                    <Button variant="primary" onClick={handleSave}>
+                        Incluir Produto
                     </Button>
                 </Modal.Footer>
             </Modal>
 
             <h2 className="product-title">Buscar produto</h2>
 
-            <div className="product-form-control-container">
+            {/*             <div className="product-form-control-container">
                 <input className="product-form-control" type="text" />
-            </div>
+            </div> */}
             <table className="product-table">
                 <thead>
                     <tr className="show-cell">
