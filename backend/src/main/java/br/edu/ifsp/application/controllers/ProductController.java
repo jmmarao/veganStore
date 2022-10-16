@@ -28,7 +28,7 @@ public class ProductController {
         return ResponseEntity.ok().body(productService.findProducts());
     }
 
-    @PostMapping("/{productId}/update")
+    @PutMapping("/{productId}/update")
     public ResponseEntity<String> productToUpdate(@PathVariable(value = "productId") Integer productId,
                                                   @RequestBody ProductDTO productDTO) {
         productService.updateProduct(productId, productDTO);
