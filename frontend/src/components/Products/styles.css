@@ -72,6 +72,10 @@
     background-color: #007565;
 }
 
+.product-red-btn-container {
+    display: flex;
+    justify-content: center;
+}
 
 @media (min-width: 576px) {
     .card {

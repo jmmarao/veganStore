@@ -2,6 +2,8 @@ import './styles.css';
 import { useEffect, useState, useRef } from "react";
 import { Product } from "../../models/product";
 import api from '../../service/api';
+import DeleteButton from './DeleteButton';
+import EditButton from './EditButton';
 
 /* import 'bootstrap/dist/css/bootstrap.min.css'; */
 import Button from 'react-bootstrap/Button';
@@ -121,7 +123,7 @@ function Products() {
                 <input
                     className="product-form-control"
                     type="text"
-                    value = {nameOrProviderToFInd}
+                    value={nameOrProviderToFInd}
                     onChange={(e) => setNameOrProviderToFind(e.target.value)}
                     placeholder='Digite o produto ou seu provedor' />
             </div>
@@ -134,6 +136,8 @@ function Products() {
                         <th>Provedor</th>
                         <th>Valor de Custo</th>
                         <th>Valor de Venda</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -145,6 +149,16 @@ function Products() {
                             <td>{product.provider}</td>
                             <td>{product.costPrice}</td>
                             <td>{product.salePrice}</td>
+                            <td>
+                                <div className="product-red-btn-container">
+                                    <EditButton productId={product.id} />
+                                </div>
+                            </td>
+                            <td>
+                                <div className="product-red-btn-container">
+                                    <DeleteButton productId={product.id} />
+                                </div>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
