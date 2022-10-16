@@ -42,6 +42,16 @@ function Products() {
     };
 
     const [products, setProducts] = useState<Product[]>([]);
+    const [nameOrProviderToFInd, setNameOrProviderToFind] = useState("");
+
+    useEffect(() => {
+        api
+            .get(`/product/${nameOrProviderToFInd}`)
+            .then((response) => setProducts(response.data))
+            .catch((err) => {
+                console.error("Ops! Ocorreu um erro!" + err);
+            });
+    }, [nameOrProviderToFInd]);
 
     useEffect(() => {
         api
@@ -107,9 +117,14 @@ function Products() {
 
             <h2 className="product-title">Buscar produto</h2>
 
-            {/*             <div className="product-form-control-container">
-                <input className="product-form-control" type="text" />
-            </div> */}
+            <div className="product-form-control-container">
+                <input
+                    className="product-form-control"
+                    type="text"
+                    value = {nameOrProviderToFInd}
+                    onChange={(e) => setNameOrProviderToFind(e.target.value)}
+                    placeholder='Digite o produto ou seu provedor' />
+            </div>
             <table className="product-table">
                 <thead>
                     <tr className="show-cell">
