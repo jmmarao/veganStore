@@ -1,28 +1,21 @@
 import { ToastContainer } from 'react-toastify';
-import Customers from "./components/Customers";
-import Products from './components/Products';
+import AppRoutes from './AppRouters';
 import Header from "./components/Header";
+
+import LoginPage from "./components/LoginPage";
 
 
 function App() {
   return (
     <>
       <Header />
-
       <main>
         <section>
           <div>
-            <Customers />
-          </div>
-        </section>
-
-        <section>
-          <div>
-            <Products />
+            <AppRoutes />
           </div>
         </section>
       </main>
-
     </>
   )
 }
