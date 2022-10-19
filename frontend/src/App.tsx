@@ -1,9 +1,6 @@
 import { ToastContainer } from 'react-toastify';
-import AppRoutes from './AppRouters';
+import AppRoutes from './AppRoutes';
 import Header from "./components/Header";
-
-import LoginPage from "./components/LoginPage";
-
 
 function App() {
   return (

@@ -7,16 +7,22 @@ import {
 
 import LoginPage from "./components/LoginPage";
 import HomePage from "./components/HomePage";
+import Customers from "./components/Customers";
+import Products from "./components/Products";
+import { AuthProvider } from "./contexts/auth";
+
 
 function AppRoutes() {
-
-    
     return (
         <Router>
+            <AuthProvider />
             <Routes >
                 <Route path="/login" index element={<LoginPage />}></Route>
                 <Route path="/" index element={<HomePage />}></Route>
+                <Route path="/customer" index element={<Customers />}></Route>
+                <Route path="/product" index element={<Products />}></Route>
             </Routes>
+            <AuthProvider />
         </Router>
     )
 
