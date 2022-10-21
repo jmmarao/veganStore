@@ -51,12 +51,15 @@ public class CustomerService {
     }
 
     @Transactional(readOnly = true)
-    public CustomerDTO findByCPFOrEmail(String stringToFInd) {
+    public List<CustomerDTO> findByCPFOrEmail(String stringToFInd) {
+        List<CustomerDTO> list = new ArrayList<>();
         Customer customerToFind = customerRepository.queryToFindByCPFOrEmail(stringToFInd);
 
         if (customerToFind == null)
             throw new CustomerDoesNotExistException("Cliente não encontrado no sistema! Tente novamente");
 
-        return new CustomerDTO(customerToFind);
+        list.add(new CustomerDTO(customerToFind));
+
+        return list;
     }
 }
