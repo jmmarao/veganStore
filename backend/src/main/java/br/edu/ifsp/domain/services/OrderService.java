@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,6 +54,17 @@ public class OrderService {
             throw new OrderDoesNotExistException("Pedido não encontrado no sistema! Tente novamente");
 
         return orderToFind.get();
+    }
+
+    @Transactional(readOnly = true)
+    public List<OrderDTO> findOrders() {
+        List<Order> orderssDB = orderRepository.findAll();
+
+        List<OrderDTO> orders = new ArrayList<>();
+        for (Order order : orderssDB) {
+            orders.add(new OrderDTO(order));
+        }
+        return orders;
     }
 
     @Transactional

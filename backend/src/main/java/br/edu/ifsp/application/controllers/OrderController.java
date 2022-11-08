@@ -12,6 +12,11 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @GetMapping
+    public ResponseEntity<?> allOrder() {
+        return ResponseEntity.ok().body(orderService.findOrders());
+    }
+
     @PostMapping("/save")
     public ResponseEntity<String> orderToAdd(@RequestBody OrderDTO orderDTO) {
         orderService.addOrder(orderDTO);
@@ -23,7 +28,7 @@ public class OrderController {
         return ResponseEntity.ok().body(orderService.findById(orderId));
     }
 
-    @PostMapping("/{orderId}/update")
+    @PutMapping("/{orderId}/update")
     public ResponseEntity<String> orderToUpdate(@PathVariable(value = "orderId") Integer orderId,
                                                 @RequestBody OrderDTO orderDTO) {
         orderService.updateOrder(orderId, orderDTO);
