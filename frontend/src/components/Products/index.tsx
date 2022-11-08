@@ -1,34 +1,48 @@
-import './styles.css';
-import { useEffect, useState, useRef } from "react";
-import { Product } from "../../models/product";
-import api from '../../service/api';
-import DeleteButton from './DeleteButton';
-import EditButton from './EditButton';
-
-/* import 'bootstrap/dist/css/bootstrap.min.css'; */
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
+import { useEffect, useState } from "react";
+
+import './styles.css';
+import DeleteButton from './DeleteButton';
+import EditButton from './EditButton';
+
+import { Product } from "../../models/product";
+import api from '../../service/api';
+
 function Products() {
     const [show, setShow] = useState(false);
-
-    const nameRef = useRef(null);
-    const descriptionRef = useRef(null);
-    const providerRef = useRef(null);
-    const costPriceRef = useRef(null);
-    const salePriceRef = useRef(null);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleSave = () => {
+    const initialFormData = ({
+        name: "",
+        description: "",
+        costPrice: "",
+        salePrice: "",
+        provider: ""
+    });
+
+    const [formData, updateFormData] = useState(initialFormData);
+
+    const handleChange = (e) => {
+        updateFormData({
+            ...formData,
+
+            // Trimming any whitespace
+            [e.target.name]: e.target.value.trim()
+        });
+    };
+
+    const handleSubmit = (e) => {
         const productToSave = {
-            name: nameRef.current.value,
-            description: descriptionRef.current.value,
-            costPrice: costPriceRef.current.value,
-            salePrice: salePriceRef.current.value,
-            provider: providerRef.current.value
+            name: formData.name,
+            description: formData.description,
+            costPrice: formData.costPrice,
+            salePrice: formData.salePrice,
+            provider: formData.provider
         };
 
         api
@@ -37,9 +51,7 @@ function Products() {
             .catch((err) => {
                 console.error("Ops! Ocorreu um erro!" + err);
             });
-
-        setShow(false)
-
+        setShow(false);
         window.location.reload();
     };
 
@@ -66,13 +78,6 @@ function Products() {
 
     return (
         <div className="card">
-            <div >
-                <div className="btn">
-                    <button className="btn-new-product" onClick={handleShow}>Novo Produto</button>
-                </div>
-
-            </div>
-
             <Modal show={show} onHide={handleClose} className="modal-container">
                 <Modal.Header closeButton>
                     <Modal.Title>Novo Produto</Modal.Title>
@@ -83,50 +88,58 @@ function Products() {
                             <Form.Control className='formControl'
                                 type="text"
                                 placeholder="Produto"
-                                ref={nameRef} />
+                                onChange={handleChange}
+                                name="name" />
 
                             <Form.Control className='formControl'
                                 type="text"
                                 placeholder="Descrição do produto"
-                                ref={descriptionRef} />
+                                onChange={handleChange}
+                                name="description" />
 
                             <Form.Control className='formControl'
                                 type="text"
                                 placeholder="Provedor"
-                                ref={providerRef} />
+                                onChange={handleChange}
+                                name="provider" />
 
                             <Form.Control className='formControl'
                                 type="number"
                                 placeholder="Valor de custo (R$)"
-                                ref={costPriceRef} />
+                                onChange={handleChange}
+                                name="costPrice" />
 
                             <Form.Control className='formControl'
                                 type="number"
                                 placeholder="Valor de venda (R$)"
-                                ref={salePriceRef} />
+                                onChange={handleChange}
+                                name="salePrice" />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="danger" onClick={handleClose}>
                         Fechar
                     </Button>
-                    <Button variant="primary" onClick={handleSave}>
+                    <Button variant="success" onClick={handleSubmit}>
                         Incluir Produto
                     </Button>
                 </Modal.Footer>
             </Modal>
 
-            <h2 className="product-title">Buscar produto</h2>
-
-            <div className="product-form-control-container">
-                <input
-                    className="product-form-control"
-                    type="text"
-                    value={nameOrProviderToFInd}
-                    onChange={(e) => setNameOrProviderToFind(e.target.value)}
-                    placeholder='Digite o produto ou seu provedor' />
+            <div className='product-header'>
+                <button className="btn-new-product" onClick={handleShow}>Novo Produto</button>
+                <h2 className="product-title">Buscar Produto</h2>
+                <div className="product-form-control-container">
+                    <input
+                        className="product-form-control"
+                        type="text"
+                        value={nameOrProviderToFInd}
+                        onChange={(e) => setNameOrProviderToFind(e.target.value)}
+                        placeholder='Digite o produto ou seu provedor' />
+                </div>
             </div>
+
             <table className="product-table">
                 <thead>
                     <tr className="show-cell">
@@ -142,7 +155,7 @@ function Products() {
                 </thead>
                 <tbody>
                     {products.map((product) => (
-                        <tr>
+                        <tr key={product.id}>
                             <td>{product.id}</td>
                             <td>{product.name}</td>
                             <td>{product.description}</td>
@@ -151,7 +164,7 @@ function Products() {
                             <td>{product.salePrice}</td>
                             <td>
                                 <div className="product-red-btn-container">
-                                    <EditButton productId={product.id} />
+                                    <EditButton productSelected={product} />
                                 </div>
                             </td>
                             <td>
@@ -165,7 +178,6 @@ function Products() {
             </table>
         </div>
     );
-
 }
 
 export default Products;

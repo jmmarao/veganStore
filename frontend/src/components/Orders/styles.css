@@ -4,18 +4,18 @@
     padding: 30px 10px;
 }
 
-.customer-title {
+.order-title {
     color: #676fff;
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.customer-form-control-container {
+.order-form-control-container {
     margin-bottom: 25px;
     max-width: 300px;
 }
 
-.customer-form-control {
+.order-form-control {
     width: 100%;
     height: 40px;
     background-color: #1b2531;
@@ -26,7 +26,7 @@
     font-size: 14px;
 }
 
-.btn-new-customer {
+.btn-new-order {
     width: 120px;
     height: 40px;
     background-color: #676fff;
@@ -36,39 +36,44 @@
     cursor: pointer;
     font-size: 15px;
     float: right;
+    margin-bottom: 15px;
 }
 
-.customer-table {
+.order-table {
     width: 100%;
     text-align: center;
 }
 
-.customer-table thead {
+.order-table thead {
     height: 20px;
     font-size: 18px;
     color: #e9e9e9;
 }
 
-.customer-table tbody {
+.order-table tbody {
     font-size: 12px;
     font-weight: 200;
     color: #cfcfcf;
     text-align: center;
 }
 
-.customer-table tbody tr {
+.order-table tbody tr {
     height: 74px;
     border-top: 1px solid #5f6e82;
 }
 
-.customer-table tbody tr:hover>td {
+.order-table tbody tr:hover>td {
     background-color: #676fff;
 }
 
-.customer-table tbody tr:nth-child(odd) {
+.order-table tbody tr:nth-child(odd) {
     background-color: #007565;
 }
 
+.order-red-btn-container {
+    display: flex;
+    justify-content: center;
+}
 
 div.modal-body>form>div>input {
     margin-bottom: 13px;
@@ -79,11 +84,11 @@ div.modal-body>form>div>input {
         padding: 35px;
     }
 
-    .customer-table tbody tr {
+    .order-table tbody tr {
         height: 40px;
     }
 
-    .customer-table tbody {
+    .order-table tbody {
         font-size: 18px;
     }
 }

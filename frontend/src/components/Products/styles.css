@@ -26,11 +26,7 @@
     font-size: 14px;
 }
 
-.btn{
-    text-align: right;
-}
-
-.btn-new-product{
+.btn-new-product {
     width: 120px;
     height: 40px;
     background-color: #676fff;
@@ -39,6 +35,7 @@
     color: white;
     cursor: pointer;
     font-size: 15px;
+    float: right;
 }
 
 .product-table {
@@ -65,7 +62,7 @@
 }
 
 .product-table tbody tr:hover>td {
-    background-color: #676fff;;
+    background-color: #676fff;
 }
 
 .product-table tbody tr:nth-child(odd) {
@@ -75,6 +72,10 @@
 .product-red-btn-container {
     display: flex;
     justify-content: center;
+}
+
+div.modal-body>form>div>input {
+    margin-bottom: 13px;
 }
 
 @media (min-width: 576px) {

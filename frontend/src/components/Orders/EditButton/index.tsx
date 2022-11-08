@@ -7,25 +7,24 @@ import { useState } from "react";
 import './styles.css';
 
 import api from '../../../service/api';
-import { Product } from '../../../models/product';
+import { Order } from '../../../models/order';
 import icon from '../../../assets/img/edit-button.svg';
 
 type Props = {
-    productSelected: Product
+    orderSelected: Order
 }
 
-function EditButton({ productSelected }: Props) {
+function EditButton({ orderSelected }: Props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const initialFormData = ({
-        name: productSelected.name,
-        description: productSelected.description,
-        costPrice: productSelected.costPrice,
-        salePrice: productSelected.salePrice,
-        provider: productSelected.provider
+        orderStatus: orderSelected.orderStatus,
+        totalValue: orderSelected.totalValue,
+        productId: orderSelected.productId,
+        customerId: orderSelected.customerId
     });
 
     const [formData, updateFormData] = useState(initialFormData);
@@ -42,16 +41,15 @@ function EditButton({ productSelected }: Props) {
     const handleSubmit = (e) => {
         console.log(formData);
 
-        const productToSave = {
-            name: formData.name,
-            description: formData.description,
-            costPrice: formData.costPrice,
-            salePrice: formData.salePrice,
-            provider: formData.provider
+        const orderToSave = {
+            orderStatus: formData.orderStatus,
+            totalValue: formData.totalValue,
+            productId: formData.productId,
+            customerId: formData.customerId
         };
 
         api
-            .put(`/product/${productSelected.id}/update`, productToSave)
+            .put(`/order/${orderSelected.id}/update`, orderToSave)
             .then(response => console.log("Posting data: ", response))
             .catch((err) => {
                 console.error("Ops! Ocorreu um erro!" + err);
@@ -62,52 +60,29 @@ function EditButton({ productSelected }: Props) {
 
     return (
         <div>
-            <div className="product-red-btn" onClick={handleShow}>
+            <div className="order-red-btn" onClick={handleShow}>
                 <img src={icon} alt="Edit" />
             </div>
 
             <Modal show={show} onHide={handleClose} className="modal-container">
                 <Modal.Header closeButton>
-                    <Modal.Title>Alterar Produto</Modal.Title>
+                    <Modal.Title>Alterar Pedido</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            Produto
+                            Status
                             <Form.Control className='formControl'
                                 type="text"
-                                placeholder={productSelected.name}
                                 onChange={handleChange}
-                                name="name"
+                                name="orderStatus"
                             />
 
-                            Descrição do produto
-                            <Form.Control className='formControl'
-                                type="text"
-                                onChange={handleChange}
-                                name="description"
-                                placeholder={productSelected.description} />
-
-                            Provedor
-                            <Form.Control className='formControl'
-                                type="text"
-                                onChange={handleChange}
-                                name="provider"
-                                placeholder={productSelected.provider} />
-
-                            Valor de custo (R$)
+                            Valor da Compra (R$)
                             <Form.Control className='formControl'
                                 type="number"
                                 onChange={handleChange}
-                                name="costPrice"
-                                placeholder={productSelected.costPrice} />
-
-                            Valor de venda (R$)
-                            <Form.Control className='formControl'
-                                type="number"
-                                onChange={handleChange}
-                                name="salePrice"
-                                placeholder={productSelected.salePrice} />
+                                name="totalValue" />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
@@ -116,7 +91,7 @@ function EditButton({ productSelected }: Props) {
                         Fechar
                     </Button>
                     <Button variant="warning" onClick={handleSubmit}>
-                        Alterar Produto
+                        Alterar Pedido
                     </Button>
                 </Modal.Footer>
             </Modal>

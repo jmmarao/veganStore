@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from "../../contexts/auth";
 import './styles.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+/* import 'bootstrap/dist/css/bootstrap.min.css'; */
 import { Form, Button } from 'react-bootstrap';
 
 

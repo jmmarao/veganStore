@@ -4,19 +4,19 @@ import icon from '../../../assets/img/delete-button.svg';
 import './styles.css';
 
 type Props = {
-    productId: number;
+    orderId: number;
 }
 
 function handleClick(id: number) {
     api
-        .delete(`/product/${id}/delete`)
-        .then(response => toast.info("Produto deletado com sucesso"));
+        .delete(`/order/${id}/delete`)
+        .then(response => toast.info("Pedido deletado com sucesso"));
     window.location.reload();
 }
 
-function DeleteButton({ productId }: Props) {
+function DeleteButton({ orderId }: Props) {
     return (
-        <div className="product-red-btn" onClick={() => handleClick(productId)}>
+        <div className="order-red-btn" onClick={() => handleClick(orderId)}>
             <img src={icon} alt="Delete" />
         </div>
     )
