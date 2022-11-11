@@ -74,6 +74,7 @@ function EditButton({ orderSelected }: Props) {
                             Status
                             <Form.Control className='formControl'
                                 type="text"
+                                placeholder={orderSelected.orderStatus}
                                 onChange={handleChange}
                                 name="orderStatus"
                             />
@@ -81,6 +82,7 @@ function EditButton({ orderSelected }: Props) {
                             Valor da Compra (R$)
                             <Form.Control className='formControl'
                                 type="number"
+                                placeholder={orderSelected.totalValue}
                                 onChange={handleChange}
                                 name="totalValue" />
                         </Form.Group>
