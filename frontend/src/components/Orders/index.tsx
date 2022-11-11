@@ -11,6 +11,7 @@ import EditButton from './EditButton';
 
 import { Order } from "../../models/order";
 import api from '../../service/api';
+import { Link } from 'react-router-dom';
 
 function Orders() {
     const [show, setShow] = useState(false);
@@ -111,6 +112,7 @@ function Orders() {
 
             <div className='order-header'>
                 <button className="btn-new-order" onClick={handleShow}>Novo Pedido</button>
+                <Link to="/"><button className="btn-new-order">Home</button></Link>
             </div>
 
             <table className="order-table">

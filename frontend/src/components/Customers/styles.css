@@ -38,6 +38,18 @@
     float: right;
 }
 
+.btn {
+    width: 120px;
+    height: 40px;
+    background-color: #676fff;
+    border: 2px solid #384459;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    float: left;
+}
+
 .customer-table {
     width: 100%;
     text-align: center;

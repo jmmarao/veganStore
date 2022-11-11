@@ -11,6 +11,7 @@ import EditButton from './EditButton';
 
 import { Product } from "../../models/product";
 import api from '../../service/api';
+import { Link } from 'react-router-dom';
 
 function Products() {
     const [show, setShow] = useState(false);
@@ -129,6 +130,7 @@ function Products() {
 
             <div className='product-header'>
                 <button className="btn-new-product" onClick={handleShow}>Novo Produto</button>
+                <Link to="/"><button className="btn-new-product">Home</button></Link>
                 <h2 className="product-title">Buscar Produto</h2>
                 <div className="product-form-control-container">
                     <input

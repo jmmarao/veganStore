@@ -9,6 +9,7 @@ import './styles.css';
 
 import { Customer } from '../../models/customer'
 import api from '../../service/api';
+import { Link } from 'react-router-dom';
 
 function Customers() {
     const [show, setShow] = useState(false);
@@ -112,6 +113,7 @@ function Customers() {
 
             <div className='customer-header'>
                 <button className="btn-new-customer" onClick={handleShow}>Novo Cliente</button>
+                <Link to="/"><button className="btn-new-customer">Home</button></Link>
                 <h2 className="customer-title">Buscar Cliente</h2>
                 <div className="customer-form-control-container">
                     <input
